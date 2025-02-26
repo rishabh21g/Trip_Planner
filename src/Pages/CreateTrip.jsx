@@ -3,12 +3,13 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { PROMPT, SelectBudgetOptions, SelectTravelerOptions } from "../components/services/data";
-
-
+import { chatSession } from "../components/services/app";
 
 const CreateTrip = () => {
   const [place, setPlace] = useState(null);
+  const [openDialogue, setOpenDialogue] = useState(false)
   const [data, setData] = useState({});
   const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_PLACE_API_KEY;
 
@@ -20,14 +21,27 @@ const CreateTrip = () => {
   };
 
   const GenerateTrip = async () => {
-    if (!data?.budget || !data?.travelerType || !data?.noOfDays || !data?.place) return toast("Please fill up all the details")
+    const user = localStorage.getItem('user')
+    if (!user) return setOpenDialogue(true)
+    if (!data?.budget || !data?.travelerType || !data?.noOfDays || !data?.place) return toast("Please fill up all the details");
+
+
     const FINAL_PROMPT = PROMPT
-      .replace("{location}", data?.place)
-      .replace("{total days}", data?.noOfDays)
-      .replace("{travelers}", data?.travelerType)
-      .replace("{budget}", data?.budget)
-      .replace("{total days}", data?.noOfDays)
-    console.log(FINAL_PROMPT)
+      .replace("{location}", data?.place || "")
+      .replace("{total days}", data?.noOfDays || "")
+      .replace("{travelers}", data?.travelerType || "")
+      .replace("{budget}", data?.budget || "")
+      .replace("{total days}", data?.noOfDays || "")
+
+    console.log("Generated Prompt:", FINAL_PROMPT);
+
+    try {
+      const result = await chatSession?.sendMessage(FINAL_PROMPT);
+      console.log(result.response.text());
+    } catch (error) {
+      console.error("Error fetching trip details:", error);
+      toast("Failed to generate trip plan. Please try again.");
+    }
   };
 
   useEffect(() => {
@@ -109,7 +123,20 @@ const CreateTrip = () => {
       {/* Submit Button */}
       <div className="flex justify-center my-10">
         <Button onClick={GenerateTrip}>Generate Trip</Button>
+        <Dialog open={openDialogue}>
+          
+          <DialogContent>
+            <DialogHeader>
+              
+              <DialogDescription>
+             
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
+
+
     </div>
   );
 };

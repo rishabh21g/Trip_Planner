@@ -6,6 +6,7 @@ import CreateTrip from './Pages/CreateTrip.jsx';
 import Header from './components/Header/Header.jsx'
 import './index.css'
 import { Toaster } from 'sonner';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 
@@ -23,11 +24,12 @@ const Routers = createBrowserRouter(
 )
 createRoot(document.getElementById('root')).render(
   <>
-    <Header />
-    <Toaster/>
-    <RouterProvider router={Routers}>
-      
-    </RouterProvider>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_OUTH_ID}>
+      <Header />
+      <Toaster />
+      <RouterProvider router={Routers}>
+      </RouterProvider>
+    </GoogleOAuthProvider>
   </>
 
 
