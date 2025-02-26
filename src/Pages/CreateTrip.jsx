@@ -3,13 +3,14 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { SelectBudgetOptions, SelectTravelerOptions } from "../components/data/data";
+import { PROMPT, SelectBudgetOptions, SelectTravelerOptions } from "../components/services/data";
+
+
 
 const CreateTrip = () => {
   const [place, setPlace] = useState(null);
   const [data, setData] = useState({});
   const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_PLACE_API_KEY;
-
 
   const handleChange = (name, value) => {
     setData((prevData) => ({
@@ -17,11 +18,18 @@ const CreateTrip = () => {
       [name]: value,
     }));
   };
-const GenerateTrip =()=>{
-  if(!data.budget || !data.travelerType || !data.noOfPeople || !data.place){
-    return toast("Please fill up all the details")
-  }
-}
+
+  const GenerateTrip = async () => {
+    if (!data?.budget || !data?.travelerType || !data?.noOfDays || !data?.place) return toast("Please fill up all the details")
+    const FINAL_PROMPT = PROMPT
+      .replace("{location}", data?.place)
+      .replace("{total days}", data?.noOfDays)
+      .replace("{travelers}", data?.travelerType)
+      .replace("{budget}", data?.budget)
+      .replace("{total days}", data?.noOfDays)
+    console.log(FINAL_PROMPT)
+  };
+
   useEffect(() => {
     console.log("User Input Data:", data);
   }, [data]);
@@ -42,21 +50,21 @@ const GenerateTrip =()=>{
             value: place,
             onChange: (place) => {
               setPlace(place);
-              handleChange("place", place.label);
+              handleChange("place", place?.label);
             },
           }}
         />
       </div>
 
-      {/* Number of People */}
+      {/* Number of Days */}
       <div className="mt-5">
-        <h2 className="text-lg text-gray-600 my-3">How many people are traveling with you?</h2>
+        <h2 className="text-lg text-gray-600 my-3">How many days are you looking for to travel?</h2>
         <Input
           type="number"
           placeholder="e.g., 4"
           min={1}
           max={20}
-          onChange={(e) => handleChange("noOfPeople", e.target.value)}
+          onChange={(e) => handleChange("noOfDays", e.target?.value)}
         />
       </div>
 
@@ -64,17 +72,16 @@ const GenerateTrip =()=>{
       <div className="mt-10">
         <h2 className="text-gray-600 my-3 text-2xl">What is your budget range for this trip?</h2>
         <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
-          {SelectBudgetOptions.map((budget, index) => (
+          {SelectBudgetOptions?.map((budget, index) => (
             <div
               key={index}
-              className={`border py-2 px-4 rounded-lg cursor-pointer hover:shadow-lg ${
-                data.budget === budget.title ? "border-black shadow-lg" : ""
-              }`}
-              onClick={() => handleChange("budget", budget.title)}
+              className={`border py-2 px-4 rounded-lg cursor-pointer hover:shadow-lg ${data?.budget === budget?.title ? "border-black shadow-lg" : ""
+                }`}
+              onClick={() => handleChange("budget", budget?.title)}
             >
-              <h2 className="text-2xl">{budget.icon}</h2>
-              <h2 className="text-xl font-bold">{budget.title}</h2>
-              <h2 className="text-sm text-gray-600 mt-2">{budget.desc}</h2>
+              <h2 className="text-2xl">{budget?.icon}</h2>
+              <h2 className="text-xl font-bold">{budget?.title}</h2>
+              <h2 className="text-sm text-gray-600 mt-2">{budget?.desc}</h2>
             </div>
           ))}
         </div>
@@ -84,17 +91,16 @@ const GenerateTrip =()=>{
       <div className="mt-5">
         <h2 className="text-gray-600 my-3 text-2xl mt-12">Who are you traveling with?</h2>
         <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
-          {SelectTravelerOptions.map((traveler, index) => (
+          {SelectTravelerOptions?.map((traveler, index) => (
             <div
               key={index}
-              className={`border py-2 px-4 rounded-lg cursor-pointer hover:shadow-lg ${
-                data.travelerType === traveler.title ? "border-black shadow-lg" : ""
-              }`}
-              onClick={() => handleChange("travelerType", traveler.title)}
+              className={`border py-2 px-4 rounded-lg cursor-pointer hover:shadow-lg ${data?.travelerType === traveler?.title ? "border-black shadow-lg" : ""
+                }`}
+              onClick={() => handleChange("travelerType", traveler?.title)}
             >
-              <h2 className="text-2xl">{traveler.icon}</h2>
-              <h2 className="text-xl font-bold">{traveler.title}</h2>
-              <h2 className="text-sm text-gray-600 mt-2">{traveler.desc}</h2>
+              <h2 className="text-2xl">{traveler?.icon}</h2>
+              <h2 className="text-xl font-bold">{traveler?.title}</h2>
+              <h2 className="text-sm text-gray-600 mt-2">{traveler?.desc}</h2>
             </div>
           ))}
         </div>
