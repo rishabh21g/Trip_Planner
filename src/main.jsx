@@ -1,15 +1,13 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router'
-import App from './App.jsx'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import CreateTrip from './Pages/CreateTrip.jsx';
 import Header from './components/Header/Header.jsx'
-import './index.css'
+import ViewTrip from './Pages/ViewTrip.jsx';
 import { Toaster } from 'sonner';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-
-
-
+import App from './App.jsx'
+import './index.css'
 const Routers = createBrowserRouter(
   [
     {
@@ -19,6 +17,10 @@ const Routers = createBrowserRouter(
     {
       path: "/create-trip",
       element: <CreateTrip />
+    },
+    {
+      path: "/view-trip/:tripId",
+      element: <ViewTrip />
     }
   ]
 )

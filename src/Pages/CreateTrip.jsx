@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -13,11 +14,13 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { db } from "../components/services/firebase";
 
+
 const CreateTrip = () => {
   const [place, setPlace] = useState(null);
   const [openDialogue, setOpenDialogue] = useState(false)
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
   const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_PLACE_API_KEY;
 
   const handleChange = (name, value) => {
@@ -74,6 +77,7 @@ const CreateTrip = () => {
       TripData: JSON.parse(Trip_fromAI),
       docId: id
     });
+    navigate('/view-trip/'+id)
     toast("Your Trip has been generated successfully")
   }catch(err){
     console.log(err)
@@ -102,7 +106,7 @@ const CreateTrip = () => {
     try {
       const result = await chatSession?.sendMessage(FINAL_PROMPT);
       const TripDetails = result.response.text()
-      console.log( TripDetails);
+      // console.log( TripDetails);
       setLoading(false)
       saveTripFromAi(TripDetails)
     } catch (error) {
@@ -189,11 +193,13 @@ const CreateTrip = () => {
 
       {/* Submit Button */}
       <div className="flex justify-center my-10">
+     
         <Button onClick={GenerateTrip}>
           {
             loading ? <AiOutlineLoading3Quarters className="animate-spin size-5" />:  "GenerateTrip"
           }
         </Button>
+        
         <Dialog open={openDialogue}>
           <DialogContent>
             <DialogDescription>
