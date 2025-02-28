@@ -8,7 +8,7 @@ const Hotels = ({ trips }) => {
     <div className="my-2 w-full">
       <h1 className="font-bold text-3xl">Hotels Recommendations</h1>
       <div className=" flex flex-wrap gap-10 mt-5 w-full">
-        {trips?.TripData?.hotelOptions.map((hotel, index) => {
+        {trips?.TripData?.travelPlan?.hotelOptions.map((hotel, index) => {
           return (
            <Link key={index} to={`https://www.google.com/maps/search/?api=1&query=${hotel?.hotelName} ${hotel?.hotelAddress}`} target='_blank'>
              <div className="rounded-lg shadow-md hover:scale-105 w-[350px] h-[350px] p-5 gap-5 bg-gray-200" >

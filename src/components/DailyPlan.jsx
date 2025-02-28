@@ -1,42 +1,53 @@
-import React, { useEffect } from 'react'
-import image from "../assets/trip.webp"
+import React from "react";
+import image from "../assets/trip.webp"; 
 
 const DailyPlan = ({ trips }) => {
+  console.log(trips);
 
-  console.log(trips)
+  const itineraryArray = trips?.TripData?.travelPlan?.itinerary
+    ? Object.values(trips.TripData.travelPlan.itinerary)
+    : [];
+
   return (
-    <div>
-      <h1 className='mt-3 font-bold text-3xl'> Places to visit</h1>
-      <div>
-        {
-          trips?.TripData?.itinerary.map((dailyPlan, index) => {
-            return (
-              <div key={index} className='w-full flex flex-col gap-5 mt-3'>
+    <div className="my-1" >
+      <h1 className="font-bold text-3xl mb-5 ">Places to Visit</h1>
+      <div className="space-y-8">
+        {itineraryArray.map((dailyPlan, index) => (
+          <div key={index} className="bg-gray-100 p-6 rounded-lg shadow-lg">
+            {/* Day Header */}
+            <h1 className="text-2xl font-bold mb-4">Day {index + 1}</h1>
+            <h2 className="text-lg text-gray-600 font-semibold">
+              Theme: {dailyPlan.theme}
+            </h2>
 
-                <div className=' rounded-md hover:brightness-110 bg-gray-200 h-auto shadow-md p-5 flex gap-x-5'>
-
-                  <div className='w-[300px] h-auto'>
-                    <img src={image} alt="place image" className='shadow-sm rounded-md' />
-                  </div>
-                  <div className='flex flex-col'>
-                    <h2 className='text-lg font-semibold'>Day: {dailyPlan.day}</h2>
-                    <h3 className='font-medium'>Theme: {dailyPlan.theme}</h3>
-
-                  </div>
-
-
+            {/* Plan Sections */}
+            {dailyPlan.plans.map((plan, i) => (
+              <div key={i} className="flex bg-white p-4 rounded-lg shadow-md mb-4">
+                <img
+                  src={image} 
+                  alt="Place"
+                  className="w-40 h-40 object-cover rounded-md"
+                />
+                <div className="ml-4 flex flex-col justify-center">
+                  <h2 className="text-lg font-semibold text-gray-700">
+                    {plan.timeToVisit}
+                  </h2>
+                  <h1 className="text-xl font-bold">{plan.placeName}</h1>
+                  <p className="text-gray-500">{plan.details}</p>
+                  <p className="text-blue-600 font-medium">
+                    Travel Time: {plan.travelTime}
+                  </p>
+                  <p className="text-green-600 font-semibold">
+                    Ticket: {plan.ticketPricing}
+                  </p>
                 </div>
-
-
-
               </div>
-            )
-
-          })
-        }
+            ))}
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DailyPlan
+export default DailyPlan;
