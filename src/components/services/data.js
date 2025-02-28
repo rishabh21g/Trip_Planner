@@ -31,26 +31,32 @@ const SelectTravelerOptions = [
 
 const SelectBudgetOptions = [
   {
-    id: 1,
+    "id": 1,
+    "title": "Cheap",
+    "desc": "Travel for less with ultra-budget options—hostels, street food, and free experiences!",
+    "icon": "🪙"
+  },
+  {
+    id: 2,
     title: "Budget-Friendly",
     desc: "Explore the world on a shoestring budget—smart choices, big adventures!",
     icon: "💳",
   },
   {
-    id: 2,
+    id: 3,
     title: "Moderate",
     desc: "A balance between comfort and affordability—enjoy the best of both worlds.",
     icon: "💰",
   },
   {
-    id: 3,
+    id: 4,
     title: "Luxury",
     desc: "Indulge in a lavish experience—premium stays, gourmet dining, and first-class travel.",
     icon: "💸",
   },
 ];
 
-const PROMPT = "Generate Travel Plan for Location : {location}, for {total days} days for {travelers} with a {budget} budget Give me a Hotels options list with HotelName, Hotel addresses, Price, hotel image url, geo coordinates, rating , descriptions and suggest itinerary in array of objects with placeName, Place and Details, Place Image Url, Geo Coordinates, ticket Pricing, Time travel each of the location for {total days} days with each day plan wth best time to visit in JSON format."
+const PROMPT = "Generate Travel Plan for Location : {location}, for {total days} days for {travelers} with a {budget} budget Give me a Hotels options list with HotelName, Hotel addresses, Price, hotel image url, geo coordinates, rating , descriptions and suggest itinerary in array of objects so i can render each details using map function in react with placeName, Place and Details, Place Image Url, Geo Coordinates, ticket Pricing, Time travel each of the location for {total days} days with each day plan wth best time to visit in JSON format."
 
 
 

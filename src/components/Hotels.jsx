@@ -3,6 +3,7 @@ import image from "../assets/trip.webp";
 import { Link } from 'react-router';
 
 const Hotels = ({ trips }) => {
+  console.log(trips)
   return (
     <div className="my-2 w-full">
       <h1 className="font-bold text-3xl">Hotels Recommendations</h1>
@@ -10,7 +11,7 @@ const Hotels = ({ trips }) => {
         {trips?.TripData?.hotelOptions.map((hotel, index) => {
           return (
            <Link key={index} to={`https://www.google.com/maps/search/?api=1&query=${hotel?.hotelName} ${hotel?.hotelAddress}`} target='_blank'>
-             <div className="rounded-lg shadow-md hover:scale-105 w-[350px] h-auto p-5 gap-5 bg-gray-200" >
+             <div className="rounded-lg shadow-md hover:scale-105 w-[350px] h-[350px] p-5 gap-5 bg-gray-200" >
               <img src={image} alt="Hotel" className="rounded-md w-full" />
               <h2 className="font-semibold mt-2">{hotel?.hotelName}</h2>
               <p className="text-xs text-gray-600">Location: {hotel?.hotelAddress}</p>
