@@ -35,7 +35,7 @@ const ViewTrip = () => {
       <Hotels trips={trips}/>
 
       {/* Daily Plans */}
-      <DailyPlan trips={trips}/>
+      <DailyPlan itinerary={trips?.TripData?.itinerary}/>
 
       {/* Footer */}
       <Footer trips={trips}/>

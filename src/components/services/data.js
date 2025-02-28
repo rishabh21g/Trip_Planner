@@ -50,7 +50,7 @@ const SelectBudgetOptions = [
   },
 ];
 
-const PROMPT = "Generate Travel Plan for Location : {location}, for {total days} days for {travelers} with a {budget} budget Give me a Hotels options list with HotelName, Hotel addresses, Price, hotel image url, geo coordinates, rating , descriptions and suggest itinerary with placeName, Place and Details, Place Image Url, Geo Coordinates, ticket Pricing, Time travel each of the location for {total days} days with each day plan wth best time to visit in JSON format."
+const PROMPT = "Generate Travel Plan for Location : {location}, for {total days} days for {travelers} with a {budget} budget Give me a Hotels options list with HotelName, Hotel addresses, Price, hotel image url, geo coordinates, rating , descriptions and suggest itinerary in array of objects with placeName, Place and Details, Place Image Url, Geo Coordinates, ticket Pricing, Time travel each of the location for {total days} days with each day plan wth best time to visit in JSON format."
 
 
 
