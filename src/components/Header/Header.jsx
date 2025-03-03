@@ -53,10 +53,10 @@ const Header = () => {
     localStorage.clear()
     window.location.reload()
   }
-  useEffect(() => {
-    if (user) console.log(user)
+  // useEffect(() => {
+  //   if (user) console.log(user)
 
-  }, [user])
+  // }, [user])
   return (
     <header className='max-w-full flex justify-between mx-auto items-center xl:px-6 md:px-4 px-8 my-2 p-3 shadow-md'>
       <span className='flex justify-center items-center font-bold  xl:text-4xl md:text-3xl text-2xl text-fuchsia-700'>TRIP-X <lord-icon

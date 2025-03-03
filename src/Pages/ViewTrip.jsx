@@ -25,7 +25,7 @@ const ViewTrip = () => {
     }
 
   }
-  console.log(trips)
+  // console.log(trips)
   useEffect(() => {
     tripId && getTripData();
   }, [tripId])

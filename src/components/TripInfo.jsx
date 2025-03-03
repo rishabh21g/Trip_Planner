@@ -8,7 +8,7 @@ const TripInfo = ({ trips }) => {
     const [imageURL, setImageURL] = useState()
     const API_KEY = import.meta.env.VITE_GOOGLE_PLACE_API_KEY;
     const BASE_URL = "/api/maps/api/place/textsearch/json";
-    const PHOTO_URL ="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1200&photo_reference={photoID}&key="+API_KEY
+    const PHOTO_URL ="https://maps.googleapis.com/maps/api/place/photo?maxwidth=2000&maxHeight=2000&photo_reference={photoID}&key="+API_KEY
     const GetPlaceIDandPhoto = async (query) => {
         if (!query) return;
 
@@ -21,7 +21,7 @@ const TripInfo = ({ trips }) => {
 
             const data = await response.json();
             if (data.status === "OK") {
-               console.log(data.results[0].photos[0].photo_reference)  
+            //    console.log(data.results[0].photos[0].photo_reference)  
                const NEW_PHOTO_URL =PHOTO_URL.replace("{photoID}" , data.results[0].photos[0].photo_reference)
                //GOT AND SET URL
                 setImageURL(NEW_PHOTO_URL)
@@ -37,13 +37,13 @@ const TripInfo = ({ trips }) => {
 
     useEffect(() => {
         if (trips?.userChoice?.place) {
-            GetPlaceIDandPhoto(trips.userChoice.place);
+            GetPlaceIDandPhoto(trips.userChoice.place );
         }
     }, [trips]);
     return (
         <div>
             <div className='items-center flex justify-center'>
-                <img src={imageURL?imageURL:image} alt='placeholder' className='w-full max-w-[750px] h-auto object-contain shadow-md rounded-lg my-4' />
+                <img src={imageURL?imageURL:image} alt='placeholder' className='w-full max-w-[750px] h-auto object-cover shadow-md rounded-lg my-4' />
             </div>
             <div className='mt-6 gap-4'>
                 <h2 className='text-3xl font-bold'> Location📍: {trips?.userChoice?.place}</h2>

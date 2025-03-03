@@ -2,7 +2,7 @@ import React from "react";
 import image from "../assets/trip.webp"; 
 
 const DailyPlan = ({ trips }) => {
-  console.log(trips);
+
 
   const itineraryArray = trips?.TripData?.travelPlan?.itinerary
     ? Object.values(trips.TripData.travelPlan.itinerary)
