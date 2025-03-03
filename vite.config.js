@@ -5,6 +5,7 @@ import { defineConfig } from "vite"
 export default defineConfig({
   plugins: [react()],
   server: {
+    allowedHosts: true,
     proxy: {
       "/api": {
         target: "https://maps.googleapis.com",
@@ -20,3 +21,4 @@ export default defineConfig({
     },
   },
 })
+

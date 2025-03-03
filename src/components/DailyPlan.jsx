@@ -22,11 +22,11 @@ const DailyPlan = ({ trips }) => {
 
             {/* Plan Sections */}
             {dailyPlan.plans.map((plan, i) => (
-              <div key={i} className="flex bg-white p-4 rounded-lg shadow-md mb-4">
+              <div key={i} className="flex flex-col xl:flex-row lg:flex-row md:flex-row bg-white p-4 rounded-lg shadow-md mb-4">
                 <img
                   src={image} 
                   alt="Place"
-                  className="w-40 h-40 object-cover rounded-md"
+                  className="w-96 h-auto object-contain rounded-md"
                 />
                 <div className="ml-4 flex flex-col justify-center">
                   <h2 className="text-lg font-semibold text-gray-700">
