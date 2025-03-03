@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import image from '../assets/trip.webp';
 import { BASE_URL, GetPlaceDetails } from './services/place';
 
 const TripInfo = ({ trips }) => {
+    
+    // PHOTO REFERENCE ID CALL
+    const [imageURL, setImageURL] = useState()
     const API_KEY = import.meta.env.VITE_GOOGLE_PLACE_API_KEY;
-    const BASE_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json";
-    const getPlaceIdsFromTextSearch = async (query) => {
+    const BASE_URL = "/api/maps/api/place/textsearch/json";
+    const PHOTO_URL ="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1200&photo_reference={photoID}&key="+API_KEY
+    const GetPlaceIDandPhoto = async (query) => {
         if (!query) return;
 
         const encodedQuery = encodeURIComponent(query);
@@ -17,9 +21,10 @@ const TripInfo = ({ trips }) => {
 
             const data = await response.json();
             if (data.status === "OK") {
-                const ids = data.results.map((place) => place.place_id);
-                setPlaceIds(ids);
-                return ids;
+               console.log(data.results[0].photos[0].photo_reference)  
+               const NEW_PHOTO_URL =PHOTO_URL.replace("{photoID}" , data.results[0].photos[0].photo_reference)
+               //GOT AND SET URL
+                setImageURL(NEW_PHOTO_URL)
             } else {
                 console.error("API request failed:", data.status);
                 return [];
@@ -32,13 +37,13 @@ const TripInfo = ({ trips }) => {
 
     useEffect(() => {
         if (trips?.userChoice?.place) {
-            getPlaceIdsFromTextSearch(trips.userChoice.place);
+            GetPlaceIDandPhoto(trips.userChoice.place);
         }
     }, [trips]);
     return (
         <div>
             <div className='items-center flex justify-center'>
-                <img src={image} alt='placeholder' className='w-full max-w-[750px] h-auto object-contain shadow-md rounded-lg my-4' />
+                <img src={imageURL?imageURL:image} alt='placeholder' className='w-full max-w-[750px] h-auto object-contain shadow-md rounded-lg my-4' />
             </div>
             <div className='mt-6 gap-4'>
                 <h2 className='text-3xl font-bold'> Location📍: {trips?.userChoice?.place}</h2>
