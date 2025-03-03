@@ -8,6 +8,7 @@ import ViewTrip from './Pages/ViewTrip.jsx';
 import { Toaster } from 'sonner';
 import App from './App.jsx'
 import './index.css'
+import MyTrips from './Pages/MyTrips.jsx';
 const Routers = createBrowserRouter(
   [
     {
@@ -21,6 +22,10 @@ const Routers = createBrowserRouter(
     {
       path: "/view-trip/:tripId",
       element: <ViewTrip />
+    },
+    {
+      path: "/my-trips",
+      element: <MyTrips />
     }
   ]
 )
