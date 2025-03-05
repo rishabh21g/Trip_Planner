@@ -11,37 +11,54 @@ const MyTrips = () => {
   const user = JSON.parse(localStorage.getItem('user'))
   const GetUserDetails = async () => {
     if (!user) {
-      navigate("/")
+      navigate("/");
       return;
     }
-    setUserTrips([])
-    const q = query(collection(db, "Trips"), where("userEmail", "==", user?.email));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      // console.log(doc.id, " => ", doc.data());
+
+    try {
+      const q = query(collection(db, "Trips"), where("userEmail", "==", user.email));
+      const querySnapshot = await getDocs(q);
+
+      const trips = querySnapshot.docs.map((doc) => doc.data()); // Collect trips in array
+
       setUserTrips((prevTrips) => {
-        return [...prevTrips, doc.data()]
-      })
-    });
-
-
-
-  }
+        if (JSON.stringify(prevTrips) !== JSON.stringify(trips)) {
+          // console.log("Updated UserTrips:", trips);
+          return trips; // Update only if different
+        }
+        return prevTrips; // Prevent unnecessary state updates
+      });
+    } catch (error) {
+      console.error("Error fetching trips:", error);
+    }
+  };
   useEffect(() => {
-    user && GetUserDetails()
-  }, [])
+    if (user) {
+      GetUserDetails();
+    }
+  }, [user]); // Ensure it runs only when user changes
+
+  useEffect(() => {
+    console.log("Updated UserTrips:", UserTrips);
+  }, [UserTrips]);
   return (
     <>
     <Header/>
     <div className="flex flex-col mx-auto max-w-full xl:px-40 lg:px-36 md:px-20 sm:px-16 px-12 mt-12">
       <h2 className='font-bold text-3xl'>My Trips</h2>
-      <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-10 mt-6 md:gap-20 lg:gap-16'>
+      <div className='grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-10 mt-6 md:gap-20 lg:gap-16'>
         {
           UserTrips.map((trip, idx) => {
             return (
-              <div key={idx} className="rounded-lg shadow-md hover:scale-105 w-[250px] h-[200px] p-5 gap-5 bg-gray-200 flex-col">
+              <div key={idx} className="rounded-lg shadow-md hover:scale-105 w-80 h-auto p-5 gap-5 bg-gray-200 flex-col">
                 <img src={image} alt="place image" className='w-full rounded-md' />
-                  
+                  <div className='flex flex-col gap-3 p-2'>
+                  <h2 className=' font-bold'> Location📍: {trip?.userChoice?.place}</h2>
+                    <p className='text-xs font-semibold'>Budget: {trip?.userChoice?.budget}</p>
+                    <p className='text-xs font-semibold'>No. of Days: {trip?.userChoice?.noOfDays}</p>
+                    <p className='text-xs font-semibold'>{trip?.userChoice?.travelerType}</p>
+               
+                  </div>
               </div>
             )
           })
