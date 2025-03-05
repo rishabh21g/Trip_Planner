@@ -24,6 +24,7 @@ const TripInfo = ({ trips }) => {
             //    console.log(data.results[0].photos[0].photo_reference)  
                const NEW_PHOTO_URL =PHOTO_URL.replace("{photoID}" , data.results[0].photos[0].photo_reference)
                //GOT AND SET URL
+            //console.log(NEW_PHOTO_URL)
                 setImageURL(NEW_PHOTO_URL)
             } else {
                 console.error("API request failed:", data.status);
@@ -36,14 +37,14 @@ const TripInfo = ({ trips }) => {
     };
 
     useEffect(() => {
-        if (trips?.userChoice?.place) {
-            GetPlaceIDandPhoto(trips.userChoice.place );
+        if (trips?.TripData?.travelPlan?.location) {
+            GetPlaceIDandPhoto(trips?.TripData?.travelPlan?.location );
         }
     }, [trips]);
     return (
         <div>
             <div className='items-center flex justify-center'>
-                <img src={imageURL?imageURL:image} alt='placeholder' className='w-full max-w-[750px] h-auto object-cover shadow-md rounded-lg my-4 scale-105' />
+                <img src={imageURL} alt='placeholder' className='w-full max-w-[750px] h-auto object-cover shadow-md rounded-lg my-4 scale-105' />
             </div>
             <div className='mt-6 gap-4'>
                 <h2 className='text-3xl font-bold'> Location📍: {trips?.userChoice?.place}</h2>
