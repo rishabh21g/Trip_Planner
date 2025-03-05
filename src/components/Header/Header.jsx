@@ -8,6 +8,7 @@ import { googleLogout } from '@react-oauth/google';
 import { Dialog, DialogContent, DialogDescription ,DialogTitle } from "@/components/ui/dialog"
 import { useGoogleLogin } from "@react-oauth/google";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from 'react-router';
 
 const Header = () => {
   const [openDialogue, setOpenDialogue] = useState(false)
@@ -66,7 +67,7 @@ const Header = () => {
       </lord-icon></span>
       {
         user ? <div className='flex gap-2 items-center justify-center'>
-          <a href="/my-trips"><Button variant="outline" className="rounded-full ">My Trips</Button></a>
+          <Link to={'/my-trips'}><Button variant="outline" className="rounded-full ">My Trips</Button></Link>
           <Popover>
             <PopoverTrigger>{<FaUserCircle className='size-7 cursor-pointer' />}</PopoverTrigger>
             <PopoverContent><h2 onClick={Logout}>Log Out</h2></PopoverContent>
