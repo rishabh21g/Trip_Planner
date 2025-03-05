@@ -15,7 +15,9 @@ import axios from "axios";
 import { db } from "../components/services/firebase";
 
 
+
 const CreateTrip = () => {
+  
   const [place, setPlace] = useState(null);
   const [openDialogue, setOpenDialogue] = useState(false)
   const [data, setData] = useState({});
@@ -30,83 +32,68 @@ const CreateTrip = () => {
     }));
   };
 
-  // const logIn = ()=>useGoogleLogin({
-  //   onSuccess: (response) => {
-  //     console.log(response)
-  //     userInfo(response)
-  //     toast('You are Sign In successfully')
-  //   },
-  //   onError: (err) => {
-  //     console.log("Sign in Failed")
-  //     toast('Sign In Failed :(')
-  //   }
-  // })
-  // const userInfo = (response) => {
-  //   if (!response || !response?.access_token) {
-  //     console.error("Invalid response object:", response);
-  //     return;
-  //   }
+  const login = useGoogleLogin({
+    onSuccess: (response) => {
+      console.log(response);
+      userInfo(response);
+      toast("You are Signed In successfully");
+    },
+    onError: (err) => {
+      console.log("Sign in Failed", err);
+      toast("Sign In Failed :(");
+    },
+  });
 
-  function logIn(){
-    useGoogleLogin({
-      onSuccess: (response) => {
-        console.log(response)
-        userInfo(response)
-        toast('You are Sign In successfully')
-      },
-      onError: (err) => {
-        console.log("Sign in Failed")
-        toast('Sign In Failed :(')
-      }
-    })
-    const userInfo = (response) => {
-      if (!response || !response?.access_token) {
-        console.error("Invalid response object:", response);
-        return;
-      }
-  }
-    axios
-      .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${response?.access_token}`, {
+
+  const userInfo = (response) => {
+    if (!response || !response?.access_token) {
+      console.error("Invalid response object:", response);
+      return null;
+    }
+    else {
+      axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${response?.access_token}`, {
         headers: {
           Authorization: `Bearer ${response?.access_token}`,
           Accept: "Application/json",
         },
       })
-      .then((res) => {
-        console.log("User Data:", res?.data);
-        const saveInfo = localStorage.setItem('user', JSON.stringify(res.data))
-        setOpenDialogue(false);
-        GenerateTrip();
-      })
-      .catch((err) => {
-        console.error("Error fetching user data:", err);
-        toast("Something went wrong")
-      });
-  };
+        .then((res) => {
+          console.log("User Data:", res?.data);
+          const saveInfo = localStorage.setItem('user', JSON.stringify(res.data))
+          setOpenDialogue(false);
+          GenerateTrip();
+        })
+        .catch((err) => {
+          console.error("Error fetching user data:", err);
+          toast("Something went wrong")
+        });
+    }
+  }
+
 
   const saveTripFromAi = async (Trip_fromAI) => {
     setLoading(true)
-  try{
-    const user = JSON.parse(localStorage.getItem("user"))
-    const id = Date.now().toString();
-    await setDoc(doc(db, "Trips", id), {
-      userChoice: data,
-      userEmail: user.email,
-      TripData: JSON.parse(Trip_fromAI),
-      docId: id
-    });
-    navigate('/view-trip/'+id)
-    toast("Your Trip has been generated successfully")
-  }catch(err){
-    console.log(err)
-   toast("Error while fetching and saving Trip!")
-  }finally{
-    setLoading(false)
-  }
-    
+    try {
+      const user = JSON.parse(localStorage.getItem("user"))
+      const id = Date.now().toString();
+      await setDoc(doc(db, "Trips", id), {
+        userChoice: data,
+        userEmail: user.email,
+        TripData: JSON.parse(Trip_fromAI),
+        docId: id
+      });
+      navigate('/view-trip/' + id)
+      toast("Your Trip has been generated successfully")
+    } catch (err) {
+      console.log(err)
+      toast("Error while fetching and saving Trip!")
+    } finally {
+      setLoading(false)
+    }
+
   }
   const GenerateTrip = async () => {
-    
+
     const user = localStorage.getItem('user')
     if (!user) return setOpenDialogue(true)
     if (!data?.budget || !data?.travelerType || !data?.noOfDays || !data?.place) return toast("Please fill up all the details");
@@ -134,7 +121,7 @@ const CreateTrip = () => {
   };
 
   useEffect(() => {
-    console.log("User Input Data:", data);
+    // console.log("User Input Data:", data);
   }, [data]);
 
   return (
@@ -211,25 +198,27 @@ const CreateTrip = () => {
 
       {/* Submit Button */}
       <div className="flex justify-center my-10">
-     
+
         <Button onClick={GenerateTrip}>
           {
-            loading ? <AiOutlineLoading3Quarters className="animate-spin size-5" />:  "GenerateTrip"
+            loading ? <AiOutlineLoading3Quarters className="animate-spin size-5" /> : "GenerateTrip"
           }
         </Button>
-        
-        <Dialog open={openDialogue}>
+
+        <Dialog open={openDialogue} onOpenChange={setOpenDialogue}>
           <DialogContent>
+            <DialogTitle className="text-lg font-semibold text-center">Sign In</DialogTitle>
             <DialogDescription>
               <p className="font-bold px-2 gap-x-2 hover:cursor-pointer text-xs flex justify-center items-center">
                 Sign In with your Google account
               </p>
-              <Button className="w-full mt-3 text-lg flex items-center gap-2 justify-center" onClick={logIn}>
+              <Button className="w-full mt-3 text-lg flex items-center gap-2 justify-center" onClick={() => login()}>
                 Click here <FcGoogle className="text-3xl" />
               </Button>
             </DialogDescription>
           </DialogContent>
         </Dialog>
+
       </div>
 
 

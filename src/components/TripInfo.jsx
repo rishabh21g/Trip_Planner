@@ -43,7 +43,7 @@ const TripInfo = ({ trips }) => {
     return (
         <div>
             <div className='items-center flex justify-center'>
-                <img src={imageURL?imageURL:image} alt='placeholder' className='w-full max-w-[750px] h-auto object-cover shadow-md rounded-lg my-4' />
+                <img src={imageURL?imageURL:image} alt='placeholder' className='w-full max-w-[750px] h-auto object-cover shadow-md rounded-lg my-4 scale-105' />
             </div>
             <div className='mt-6 gap-4'>
                 <h2 className='text-3xl font-bold'> Location📍: {trips?.userChoice?.place}</h2>

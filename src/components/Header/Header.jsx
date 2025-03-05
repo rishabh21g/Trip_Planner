@@ -5,15 +5,14 @@ import { toast } from 'sonner';
 import { FaUserCircle } from "react-icons/fa";
 import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/popover"
 import { googleLogout } from '@react-oauth/google';
-import { Dialog, DialogContent, DialogDescription } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription ,DialogTitle } from "@/components/ui/dialog"
 import { useGoogleLogin } from "@react-oauth/google";
 import { FcGoogle } from "react-icons/fc";
 
 const Header = () => {
   const [openDialogue, setOpenDialogue] = useState(false)
   const user = JSON.parse(localStorage.getItem('user'))
-  // console.log(user)
-  const logIn =()=>useGoogleLogin({
+  const logIn =useGoogleLogin({
     onSuccess: (response) => {
       console.log(response)
       userInfo(response)
@@ -25,31 +24,29 @@ const Header = () => {
     }
   })
   const userInfo = (response) => {
-    console.log(response)
     if (!response || !response?.access_token) {
       console.error("Invalid response object:", response);
-      return;
+      return null;
     }
-
-    axios
-      .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${response?.access_token}`, {
+    else {
+      axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${response?.access_token}`, {
         headers: {
           Authorization: `Bearer ${response?.access_token}`,
           Accept: "Application/json",
         },
       })
-      .then((res) => {
-        console.log("User Data:", res?.data);
-        const saveInfo = localStorage.setItem('user', JSON.stringify(res.data))
-        setOpenDialogue(false);
-
-      })
-      .catch((err) => {
-        console.error("Error fetching user data:", err);
-        toast("Something went wrong")
-      });
-  };
-
+        .then((res) => {
+          console.log("User Data:", res?.data);
+          const saveInfo = localStorage.setItem('user', JSON.stringify(res.data))
+          setOpenDialogue(false);
+          GenerateTrip();
+        })
+        .catch((err) => {
+          console.error("Error fetching user data:", err);
+          toast("Something went wrong")
+        });
+    }
+  }
   const Logout = () => {
     googleLogout()
     localStorage.clear()
@@ -84,13 +81,14 @@ const Header = () => {
 
 
       }
-      <Dialog open={openDialogue}>
+      <Dialog open={openDialogue} onOpenChange={setOpenDialogue}>
         <DialogContent>
+        <DialogTitle className="text-lg font-semibold text-center">Sign In</DialogTitle>
           <DialogDescription>
             <p className="font-bold px-2 gap-x-2 hover:cursor-pointer text-xs flex justify-center items-center">
               Sign In with your Google account
             </p>
-            <Button className="w-full mt-3 text-lg flex items-center gap-2 justify-center" onClick={logIn}>
+            <Button className="w-full mt-3 text-lg flex items-center gap-2 justify-center" onClick={()=>logIn()}>
               Click here <FcGoogle className="text-3xl" />
             </Button>
           </DialogDescription>
