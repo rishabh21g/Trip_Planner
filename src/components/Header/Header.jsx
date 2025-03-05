@@ -12,7 +12,8 @@ import { FcGoogle } from "react-icons/fc";
 const Header = () => {
   const [openDialogue, setOpenDialogue] = useState(false)
   const user = JSON.parse(localStorage.getItem('user'))
-  const logIn = useGoogleLogin({
+  // console.log(user)
+  const logIn =()=>useGoogleLogin({
     onSuccess: (response) => {
       console.log(response)
       userInfo(response)
@@ -24,6 +25,7 @@ const Header = () => {
     }
   })
   const userInfo = (response) => {
+    console.log(response)
     if (!response || !response?.access_token) {
       console.error("Invalid response object:", response);
       return;
