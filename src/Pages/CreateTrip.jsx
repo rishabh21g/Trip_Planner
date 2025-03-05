@@ -30,23 +30,41 @@ const CreateTrip = () => {
     }));
   };
 
-  const logIn = ()=>useGoogleLogin({
-    onSuccess: (response) => {
-      console.log(response)
-      userInfo(response)
-      toast('You are Sign In successfully')
-    },
-    onError: (err) => {
-      console.log("Sign in Failed")
-      toast('Sign In Failed :(')
-    }
-  })
-  const userInfo = (response) => {
-    if (!response || !response?.access_token) {
-      console.error("Invalid response object:", response);
-      return;
-    }
+  // const logIn = ()=>useGoogleLogin({
+  //   onSuccess: (response) => {
+  //     console.log(response)
+  //     userInfo(response)
+  //     toast('You are Sign In successfully')
+  //   },
+  //   onError: (err) => {
+  //     console.log("Sign in Failed")
+  //     toast('Sign In Failed :(')
+  //   }
+  // })
+  // const userInfo = (response) => {
+  //   if (!response || !response?.access_token) {
+  //     console.error("Invalid response object:", response);
+  //     return;
+  //   }
 
+  function logIn(){
+    useGoogleLogin({
+      onSuccess: (response) => {
+        console.log(response)
+        userInfo(response)
+        toast('You are Sign In successfully')
+      },
+      onError: (err) => {
+        console.log("Sign in Failed")
+        toast('Sign In Failed :(')
+      }
+    })
+    const userInfo = (response) => {
+      if (!response || !response?.access_token) {
+        console.error("Invalid response object:", response);
+        return;
+      }
+  }
     axios
       .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${response?.access_token}`, {
         headers: {
