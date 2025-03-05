@@ -1,4 +1,0 @@
-{
-    "devCommand": "vite",
-    "buildCommand": "NODE_ENV=development vite build --mode=development"
-  }
