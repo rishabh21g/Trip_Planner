@@ -30,7 +30,7 @@ const CreateTrip = () => {
     }));
   };
 
-  const logIn = useGoogleLogin({
+  const logIn = ()=>useGoogleLogin({
     onSuccess: (response) => {
       console.log(response)
       userInfo(response)
