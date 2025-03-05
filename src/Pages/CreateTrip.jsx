@@ -13,6 +13,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { db } from "../components/services/firebase";
+import Header from "../components/Header/Header";
 
 
 
@@ -106,12 +107,9 @@ const CreateTrip = () => {
       .replace("{budget}", data?.budget || "")
       .replace("{total days}", data?.noOfDays || "")
 
-    console.log("Generated Prompt:", FINAL_PROMPT);
-
     try {
       const result = await chatSession?.sendMessage(FINAL_PROMPT);
       const TripDetails = result.response.text()
-      // console.log( TripDetails);
       setLoading(false)
       saveTripFromAi(TripDetails)
     } catch (error) {
@@ -121,10 +119,12 @@ const CreateTrip = () => {
   };
 
   useEffect(() => {
-    // console.log("User Input Data:", data);
+   
   }, [data]);
 
   return (
+    <>
+    <Header/>
     <div className="flex flex-col mx-auto max-w-full xl:px-40 lg:px-36 md:px-20 sm:px-16 px-12 mt-12">
       <h2 className="font-bold text-3xl">Share your travel preferences with us</h2>
       <p className="text-lg text-gray-600">
@@ -223,6 +223,7 @@ const CreateTrip = () => {
 
 
     </div>
+    </>
   );
 };
 

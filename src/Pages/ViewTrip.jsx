@@ -7,7 +7,7 @@ import TripInfo from '../components/TripInfo';
 import Hotels from '../components/Hotels';
 import DailyPlan from '../components/DailyPlan';
 import Footer from '../components/Footer';
-import Tips from '../components/Tips';
+import Header from '../components/Header/Header';
 
 const ViewTrip = () => {
   const [trips, seTrips] = useState([])
@@ -30,6 +30,9 @@ const ViewTrip = () => {
     tripId && getTripData();
   }, [tripId])
   return (
+    <>
+    
+    <Header/>
     <div className="flex flex-col mx-auto max-w-full xl:px-40 lg:px-36 md:px-20 sm:px-16 px-12 mt-12">
       {/* Info Section */}
       <TripInfo trips={trips} />
@@ -46,6 +49,7 @@ const ViewTrip = () => {
       {/* Footer */}
       <Footer trips={trips} />
     </div>
+    </>
   )
 }
 

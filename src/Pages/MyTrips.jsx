@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../components/services/firebase';
 import image from "../assets/trip.webp";
+import Header from '../components/Header/Header';
 
 const MyTrips = () => {
   const [UserTrips, setUserTrips] = useState([])
@@ -17,7 +18,7 @@ const MyTrips = () => {
     const q = query(collection(db, "Trips"), where("userEmail", "==", user?.email));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, " => ", doc.data());
       setUserTrips((prevTrips) => {
         return [...prevTrips, doc.data()]
       })
@@ -30,9 +31,11 @@ const MyTrips = () => {
     user && GetUserDetails()
   }, [])
   return (
+    <>
+    <Header/>
     <div className="flex flex-col mx-auto max-w-full xl:px-40 lg:px-36 md:px-20 sm:px-16 px-12 mt-12">
-      <h2 className='text-center font-bold text-3xl'>My Trips</h2>
-      <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2'>
+      <h2 className='font-bold text-3xl'>My Trips</h2>
+      <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-10 mt-6 md:gap-20 lg:gap-16'>
         {
           UserTrips.map((trip, idx) => {
             return (
@@ -46,6 +49,7 @@ const MyTrips = () => {
 
       </div>
     </div>
+    </>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import image from '../assets/trip.webp';
-import { BASE_URL, GetPlaceDetails } from './services/place';
+
 
 const TripInfo = ({ trips }) => {
     
