@@ -19,14 +19,14 @@ const MyTrips = () => {
       const q = query(collection(db, "Trips"), where("userEmail", "==", user.email));
       const querySnapshot = await getDocs(q);
 
-      const trips = querySnapshot.docs.map((doc) => doc.data()); // Collect trips in array
+      const trips = querySnapshot.docs.map((doc) => doc.data()); 
 
       setUserTrips((prevTrips) => {
         if (JSON.stringify(prevTrips) !== JSON.stringify(trips)) {
-          // console.log("Updated UserTrips:", trips);
-          return trips; // Update only if different
+          
+          return trips; 
         }
-        return prevTrips; // Prevent unnecessary state updates
+        return prevTrips; 
       });
     } catch (error) {
       console.error("Error fetching trips:", error);
@@ -36,7 +36,7 @@ const MyTrips = () => {
     if (user) {
       GetUserDetails();
     }
-  }, [user]); // Ensure it runs only when user changes
+  }, [user]); 
 
   useEffect(() => {
     console.log("Updated UserTrips:", UserTrips);

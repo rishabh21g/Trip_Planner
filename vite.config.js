@@ -11,7 +11,7 @@ export default defineConfig({
         target: "https://maps.googleapis.com",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
-        secure: true, // Set to false if using self-signed SSL
+        secure: true,
       },
     },
   },

@@ -153,7 +153,7 @@ const CreateTrip = () => {
           type="number"
           placeholder="e.g., 4"
           min={1}
-          max={20}
+          max={7}
           onChange={(e) => handleChange("noOfDays", e.target?.value)}
         />
       </div>

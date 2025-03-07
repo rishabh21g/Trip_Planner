@@ -15,7 +15,6 @@ const Header = () => {
   const user = JSON.parse(localStorage.getItem('user'))
   const logIn =useGoogleLogin({
     onSuccess: (response) => {
-      console.log(response)
       userInfo(response)
       toast('You are Sign In successfully')
     },
@@ -44,7 +43,6 @@ const Header = () => {
         })
         .catch((err) => {
           console.error("Error fetching user data:", err);
-          toast("Something went wrong")
         });
     }
   }

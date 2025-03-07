@@ -57,7 +57,7 @@ const SelectBudgetOptions = [
 ];
 
 const PROMPT = "Generate Travel Plan for Location : {location}, for {total days} days for {travelers} with a {budget} budget Give me a Hotels options list with HotelName, Hotel addresses, Price, hotel image url, geo coordinates, rating , descriptions and suggest itinerary in array of objects so i can render each details using map function in react with placeName, Place and Details, Place Image Url, Geo Coordinates, ticket Pricing, Time travel each of the location for {total days} days with each day plan wth best time to visit in JSON format."
-const BASE_URL = "/api/maps/api/place/textsearch/json";
 
 
-export { SelectTravelerOptions, SelectBudgetOptions , PROMPT ,BASE_URL};
+
+export { SelectTravelerOptions, SelectBudgetOptions , PROMPT};
