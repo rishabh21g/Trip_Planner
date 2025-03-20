@@ -1,30 +1,39 @@
+import { GiReceiveMoney } from "react-icons/gi";
+import { GiTakeMyMoney } from "react-icons/gi";
+import { FaMoneyCheckDollar } from "react-icons/fa6";
+import { FaMoneyCheck } from "react-icons/fa";
+import { FaPersonHiking } from "react-icons/fa6";
+import { FaPeopleRoof } from "react-icons/fa6";
+import { IoIosPeople } from "react-icons/io";
+import { RiHeartsFill } from "react-icons/ri";
+
 const SelectTravelerOptions = [
   {
     id: 1,
     title: "Solo Explorer",
     desc: "Discover the world on your own terms—freedom, adventure, and self-discovery await!",
-    icon: "😎",
+    icon: <FaPersonHiking/>,
     people: "1 Person",
   },
   {
     id: 2,
     title: "Romantic Getaway",
     desc: "A dreamy escape for two—love, laughter, and unforgettable moments together.",
-    icon: "💘",
+    icon: <RiHeartsFill/>,
     people: "2 People",
   },
   {
     id: 3,
     title: "Family Adventure",
     desc: "Create lasting memories with your loved ones—fun, bonding, and exploration for all!",
-    icon: "🏕️",
+    icon: <FaPeopleRoof/>,
     people: "3+ People",
   },
   {
     id: 4,
-    title: "Friends' Escape",
+    title: "Friend's Escape",
     desc: "A thrilling trip with your best buddies—epic stories, laughter, and adventure await!",
-    icon: "🎉",
+    icon: <IoIosPeople/>,
     people: "3+ Friends",
   },
 ];
@@ -34,25 +43,25 @@ const SelectBudgetOptions = [
     "id": 1,
     "title": "Cheap",
     "desc": "Travel for less with ultra-budget options—hostels, street food, and free experiences!",
-    "icon": "🪙"
+    "icon": <GiReceiveMoney/>
   },
   {
     id: 2,
     title: "Budget-Friendly",
     desc: "Explore the world on a shoestring budget—smart choices, big adventures!",
-    icon: "💳",
+    icon: <GiTakeMyMoney/>,
   },
   {
     id: 3,
     title: "Moderate",
     desc: "A balance between comfort and affordability—enjoy the best of both worlds.",
-    icon: "💰",
+    icon: <FaMoneyCheck/>,
   },
   {
     id: 4,
     title: "Luxury",
     desc: "Indulge in a lavish experience—premium stays, gourmet dining, and first-class travel.",
-    icon: "💸",
+    icon: <FaMoneyCheckDollar/>,
   },
 ];
 

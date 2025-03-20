@@ -1,9 +1,8 @@
-import React from 'react'
+
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import CreateTrip from './Pages/CreateTrip.jsx';
-import Header from './components/Header/Header.jsx'
 import ViewTrip from './Pages/ViewTrip.jsx';
 import { Toaster } from 'sonner';
 import App from './App.jsx'
@@ -35,6 +34,7 @@ createRoot(document.getElementById('root')).render(
       <Toaster />
       <RouterProvider router={Routers}>
       </RouterProvider>
+      
     </GoogleOAuthProvider>
   </>
 
