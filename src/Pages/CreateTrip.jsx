@@ -140,7 +140,7 @@ const CreateTrip = () => {
       <div className="relative w-full h-full">
         <Header />
         <div className="flex flex-col mx-auto max-w-full xl:px-40 lg:px-36 md:px-20 sm:px-16 px-12 mt-12">
-          <h2 className="font-bold text-5xl text-gray-200">
+          <h2 className="font-bold md:text-5xl text-3xl text-gray-200">
             Share your travel preferences with us
           </h2>
           <p className="text-lg text-gray-100 mt-3">

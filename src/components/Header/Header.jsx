@@ -51,10 +51,10 @@ const Header = () => {
   };
 
   return (
-    <header className="relative max-w-full flex justify-between mx-auto items-center xl:px-6 md:px-4 px-8 my-2 p-3 shadow-sm shadow-gray-200 text-white ">
-      <span className="flex justify-center items-center font-bold xl:text-4xl md:text-3xl text-2xl gap-x-3">
-        trip-X
-      <img src={svg} className='w-16 h-auto'/>
+    <header className="relative max-w-full flex justify-between mx-auto items-center xl:px-6 md:px-4 px-3 my-2 p-3 shadow-sm shadow-gray-200 text-white ">
+      <span className="flex justify-center items-center font-bold  md:text-4xl text-lg gap-x-1">
+       <p> trip-X</p>
+      <img src={svg} className='md:w-16 w-8 h-auto'/>
       </span>
       {
         user ? (
