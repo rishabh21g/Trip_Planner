@@ -41,6 +41,7 @@ const Footer = () => {
         Made by <span className="text-white font-extralight">Rishabh</span>
       </div>
     </footer>
+
   );
 };
 

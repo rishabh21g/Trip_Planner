@@ -50,6 +50,7 @@
   
   .type1:hover::after {
     transform: translateY(0) scale(1.2);
+    background-color:  #2563eb;
   }
   
   .type1:hover::before {
