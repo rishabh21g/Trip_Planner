@@ -1,8 +1,6 @@
-import React from "react";
-
 const About = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center min-h-screen px-6 md:px-12 lg:px-24 py-12 mx-auto">
+    <div className="flex flex-col md:flex-row items-center min-h-screen  md:px-12 lg:px-24 py-12 px-12 mx-auto max-w-7xl">
       <div className="w-full md:w-3/4 flex items-center">
         <div className="w-full max-w-2xl">
           <h1 className="text-3xl md:text-5xl font-bold text-blue-500">About Trip-X</h1>
@@ -39,8 +37,8 @@ const About = () => {
       </div>
       <div className="w-full md:w-1/4 flex justify-center mt-10 md:mt-0">
         <img
-          src="https://cdn.pixabay.com/photo/2021/12/02/10/50/ice-6840241_1280.jpg"
-          className="w-[250px] h-[250px] md:w-[300px] md:h-[300px] object-cover rounded-lg shadow-lg"
+          src="https://plus.unsplash.com/premium_photo-1681487924146-c091598b7e8a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          className="w-full h-auto md:w-full md:h-auto object-cover rounded-none shadow-lg"
           alt="Trip-X Adventure"
         />
       </div>
