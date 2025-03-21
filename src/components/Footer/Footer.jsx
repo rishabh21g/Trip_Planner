@@ -6,6 +6,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-transparent text-center backdrop-blur-3xl ">
+      <hr  className="py-4 text-gray-300"/>
       <div className="flex  text-3xl text-white items-center justify-center">
       <img src={svg} className="w-12 h-auto mx-2" />
       trip-X
@@ -22,7 +23,7 @@ const Footer = () => {
         <a href="https://x.com/rishabh21g" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600">
           <FaXTwitter size={24} />
         </a>
-        <a href="https://www.linkedin.com/in/rishabh-gupta-157629166" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600">
+        <a href="https://www.linkedin.com/in/rishabh19g/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600">
           <FaLinkedin size={24} />
         </a>
         <a href="https://www.instagram.com/rishabh21g_/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600">
@@ -37,7 +38,7 @@ const Footer = () => {
       </div>
 
       <div className="mt-4 text-gray-400 text-sm">
-        Made with ❤️ by <span className="text-white font-semibold">Rishabh Gupta</span>
+        Made by <span className="text-white font-extralight">Rishabh</span>
       </div>
     </footer>
   );

@@ -1,6 +1,7 @@
 import Hero from './components/Hero/Hero';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import About from './components/About/About';
 
 const App = () => {
   return (
@@ -12,9 +13,10 @@ const App = () => {
       <div className="absolute left-1/2 top-0 -translate-x-1/2 h-full w-full opacity-50 bg-[radial-gradient(circle_300px_at_30%_300px,#fbfbfb36,#000)]"></div>
       
    
-      <div className="relative w-full h-screen">
+      <div className="relative w-full h-full">
         <Header />
         <Hero />
+        <About/>
         <Footer/>
        
       </div>

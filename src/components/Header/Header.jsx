@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { useGoogleLogin } from "@react-oauth/google";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router';
-
+import svg from "../../assets/trip-x.svg"
 const Header = () => {
   const [openDialogue, setOpenDialogue] = useState(false);
   const user = JSON.parse(localStorage.getItem('user'));
@@ -51,22 +51,16 @@ const Header = () => {
   };
 
   return (
-    <header className="relative max-w-full flex justify-between mx-auto items-center xl:px-6 md:px-4 px-8 my-2 p-3 shadow-sm shadow-gray-200 text-white backdrop-blur-3xl">
-      <span className="flex justify-center items-center font-bold xl:text-4xl md:text-3xl text-2xl">
-        TRIP-X
-        <lord-icon
-          src="https://cdn.lordicon.com/onmwuuox.json"
-          trigger="loop"
-          delay="500"
-          stroke="bold"
-          state="in-jump-dynamic"
-        ></lord-icon>
+    <header className="relative max-w-full flex justify-between mx-auto items-center xl:px-6 md:px-4 px-8 my-2 p-3 shadow-sm shadow-gray-200 text-white ">
+      <span className="flex justify-center items-center font-bold xl:text-4xl md:text-3xl text-2xl gap-x-3">
+        trip-X
+      <img src={svg} className='w-16 h-auto'/>
       </span>
       {
         user ? (
           <div className="flex gap-2 items-center justify-center">
             <Link to={'/my-trips'}>
-              <Button variant="outline" className="bg-transparent hover:bg-blue-600 rounded-none border-none">My Trips</Button>
+              <Button variant="outline" className="bg-transparent rounded-none border-none">My Trips</Button>
             </Link>
             <div className="p-3 rounded-none border-none flex items-center justify-center space-x-3">
             <Popover>
