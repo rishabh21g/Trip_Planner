@@ -1,43 +1,34 @@
 import { Link } from "react-router";
-import image from "../assets/trip.webp"
-import { BsFillPinMapFill } from "react-icons/bs";;
+import { TbLocationFilled } from "react-icons/tb";
+import { FaHotel } from "react-icons/fa6";
+import { IoPricetags } from "react-icons/io5";
+import { MdOutlineStarPurple500 } from "react-icons/md";
+import VisitBtn from "./Visit/VisitBtn";
 
 const HotelCard = ({ hotel }, { index }) => {
   console.log(hotel);
 
   return (
     <Link
-      key={index}
-      to={`https://www.google.com/maps/search/?api=1&query=${hotel?.hotelName} ${hotel?.hotelAddress}`}
-      target="_blank"
-    >
-      <div className="h-[22em] w-[25em] border-2 border-[rgba(59,130,246,0.5)] rounded-none bg-gradient-to-br from-[rgba(59,130,246,1)] to-[rgba(59,130,246,0.01)] text-gray-200 font-nunito p-6  flex justify-center items-left flex-col gap-[0.75em] backdrop-blur-[2px] ">
+    key={index}
+    to={`https://www.google.com/maps/search/?api=1&query=${hotel?.hotelName} ${hotel?.hotelAddress}`}
+    target="_blank"
+    className="w-full sm:w-80 md:w-96 lg:w-[28rem]"
+  >
+    <div className="shadow-lg  p-5 bg-transparent border border-gray-300 flex flex-col items-center w-full h-full relative transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] ">
+      <div className=" space-y-3 w-full px-3 h-full">
+        <h2 className="font-semibold text-3xl flex gap-x-3 text-gray-100"><span>{hotel?.hotelName}</span><FaHotel/></h2>
+        <p className="text-sm flex gap-x-1 text-gray-200 "><TbLocationFilled/><span>{hotel?.hotelAddress}</span></p>
+        <p className="text-sm flex gap-x-1 text-gray-200">Price <IoPricetags/><span>{hotel?.price}</span></p>
+        <p className="text-sm flex gap-x-1 text-gray-200">Rating<MdOutlineStarPurple500/><span>{hotel?.rating}/5</span></p>
+        <p className="text-sm text-gray-200">{hotel?.description}</p>
         <div>
-          <h1 className="text-[2em] font-medium">{hotel?.hotelName}</h1>
-          <p className="text-[0.95em]">Location <BsFillPinMapFill/> {hotel?.hotelAddress}</p>
-          <p className="text-[0.95em]">Rating: {hotel?.rating} /5</p>
-          <p className="text-[0.95em]">Price: {hotel?.price}</p>
-          <p className="text-[0.85em]">{hotel?.description}</p>
+          <VisitBtn />
         </div>
-
-        <button className="h-fit w-fit px-[1em] py-[0.25em] border-[1px] rounded-full flex justify-center items-center gap-[0.5em] overflow-hidden group hover:translate-y-[0.125em] duration-200 backdrop-blur-[12px]">
-          <p>Visit </p>
-          
-        </button>
       </div>
-
-      {/* <div className="rounded-lg shadow-md hover:scale-105 w-96 h-80 p-5 gap-2 bg-gray-200 items-center flex flex-col" >
-                <img src={image} alt="Hotel" className="rounded-md w-80 h-auto object-contain" />
-                <div>
-                <h2 className="font-semibold mt-2">{hotel?.hotelName}</h2>
-                <h2 className="text-xs text-gray-600">Location: {hotel?.hotelAddress}</h2>
-                <h2 className="text-xs text-gray-600">Price: {hotel?.price}</h2>
-                <h2 className="text-xs text-gray-600">Rating: {hotel?.rating}</h2>
-                <h2 className="text-xs text-gray-600">{hotel?.description}</h2>
-
-                </div>
-            </div> */}
-    </Link>
+    </div>
+  </Link>
+  
   );
 };
 
